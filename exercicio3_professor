@@ -94,12 +94,12 @@ altura(No, R) :- no(E, No, D), altura(E, R1), altura(D, R2), M is max(R1, R2), R
 % termo corresponde à variável de resposta não instanciada.
 
 mais_a_esquerda(R) :- raiz(No), mais_a_esquerda(No, R).
-mais_a_esquerda(No, No) :- no(E, No, _),
-    E == nil, !.
+
+mais_a_esquerda(No, No) :- no(nil, No, _) ,!.
 
 mais_a_esquerda(No, No) :- no_folha(No), !.
 
-mais_a_esquerda
+mais_a_esquerda(No, R) :- no(E, No, _), mais_a_esquerda(E, R).
 
 
 
