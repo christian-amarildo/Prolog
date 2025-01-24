@@ -1,0 +1,106 @@
+raiz(15).
+no(10, 15, 20).
+no(5, 10, 9).
+no(17, 20, 27).
+no(nil, 5, 7).
+no(25,27, nil).
+
+% 1 Utilize o predicado no_interno/1 para construir uma regra
+% que retorne True se o nó passado como argumento da consulta
+% por um nó interno.
+
+no_interno(No) :- no(_, No, _).
+no_folha(No) :- no(No, _, _) , \+ no_interno(No).
+no_folha(No) :- no(_, _, No) , \+ no_interno(No).
+
+
+% 4- Utilize os predicados pre_ordem/0, pre_ordem/1, visita/1 e
+% write/1 para construir regras que realizem a leitura da árvore
+% em pré-ordem. O predicado de consulta é o pre_ordem/0. Para
+% a árvore de base de conhecimento, a saída esperada é: 15 - 10
+% - 5 - 7 - 9 - 20 - 17 - 27 - 25 -
+
+pre_ordem :- raiz(No), pre_ordem(No).
+pre_ordem(nil) :- !.
+pre_ordem(No) :- no_folha(No), visita(No), !.
+pre_ordem(No) :- no(E, No, D), visita(No), pre_ordem(E), pre_ordem(D).
+visita(No) :- write(No), write(' - ').
+
+
+% 5- Utilize os predicados in_ordem/0, in_ordem/1, visita/1 e
+% write/1 para construir regras que realizem a leitura da árvore
+% em ordem. O predicado de consulta é o in_ordem/0. Para a
+% árvore de base de conhecimento, a saída esperada é: 5 - 7 - 10
+% - 9 - 15 - 17 - 20 - 25 - 27 -
+
+in_ordem :- raiz(No), pre_ordem(No).
+in_ordem(nil) :- !.
+in_ordem(No) :- no_folha(No), visita(No), !.
+in_ordem(No) :- no(E, No, D), in_ordem(E), visita(No), in_ordem(D).
+
+%6- Utilize os predicados pos_ordem/0, pos_ordem/1, visita/1 e
+%write/1 para construir regras que realizem a leitura da árvore
+%em pós-ordem. O predicado de consulta é o pos_ordem/0. Para
+%a árvore de base de conhecimento, a saída esperada é: 7 - 5 - 9
+%- 10 - 17 - 25 - 27 - 20 - 15 -
+
+pos_ordem :- raiz(No), pos_ordem(No).
+pos_ordem(nil) :- !.
+pos_ordem(No) :- no_folha(No), visita(No), !.
+pos_ordem(No) :- no(E, No, D), visita(No), pos_ordem(E), pos_ordem(D).
+
+% 7- Utilize os predicados nivel/2, nivel/3, para calcular o nível de
+% um determinado nó. O predicado de consulta é o nivel/2, tal que
+% o primeiro termo corresponde ao nó e o segundo termo à
+% variável de resposta não instanciada. Se necessário, você pode
+% criar mais regras com novos predicados.
+
+nivel(No, R) :- raiz(Raiz), nivel(No, Raiz, R).
+filhos(No, E, D) :- no(E, No, D).
+nivel(No, No, 1) :- !.
+nivel(No,AUX,R) :- filhos(AUX, E, _), nivel(No, E, R1), R is R1 + 1, !.
+nivel(No,AUX,R) :- filhos(AUX, _ ,D), nivel(No, D, R1), R is R1 + 1, !.
+
+
+% 8- Utilize o predicado grau/2 para calcular o grau de um
+% determinado nó da árvore. Ao realizar a consulta, o primeiro
+% termo corresponde ao nó e o segundo termo à variável de
+% resposta não instanciada.
+
+grau(No, 0) :- no_folha(No), !.
+grau(No, 1) :- no(nil, No, D) , D \== nil, !.
+grau(No, 1) :- no(E, No, nil) , E \== nil, !.
+grau(_, 2).
+
+% 9- Utilize o predicado irmao/2 para informar o irmão de um
+% determinado nó da árvore. Ao realizar a consulta, o primeiro
+% termo corresponde ao nó e o segundo termo à variável de
+% resposta não instanciada.
+
+%irmao(No, Irmao).
+
+% 10- Utilize os predicados altura/1 e altura/2 para informar a
+% altura da árvore. O predicado de consulta é o altura/1 e o seu
+% termo corresponde à variável de resposta não instanciada
+
+altura(R) :- raiz(No), altura(No, R).
+altura(No, 0) :- no_folha(No), !.
+altura(nil, 0) :- !.
+altura(No, R) :- no(E, No, D), altura(E, R1), altura(D, R2), M is max(R1, R2), R is M + 1.
+
+% 11- Utilize os predicados mais_a_esquerda/1 e
+% mais_a_esquerda/2 para informar o nó mais a esquerda da
+% árvore. O predicado de consulta é o mais_a_esquerda/1 e o seu
+% termo corresponde à variável de resposta não instanciada.
+
+mais_a_esquerda(R) :- raiz(No), mais_a_esquerda(No, R).
+mais_a_esquerda(No, No) :- no(E, No, _),
+    E == nil, !.
+
+mais_a_esquerda(No, No) :- no_folha(No), !.
+
+mais_a_esquerda
+
+
+
+
