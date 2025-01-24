@@ -1,0 +1,28 @@
+%Q1: Regra para verificar a frequência de um elemento na lista.
+
+%Q2: Regra para concatenar duas listas.
+
+%Q3: Regra para concatenar duas listas dois a dois.
+
+%Q4: Regra para somar as listas que estão dentro de uma lista.
+%Exemplo: [[1,2,3],[1,1,1]] gera a saída [6, 3].
+
+%Q5: Regra para encontrar o último elemento na lista.
+
+%Q6: Regra para contar elementos contíguos 2 a 2 em uma lista.
+
+%Q7: Regra para construir a lista reversa.
+
+
+
+%Q8: Regra para informar se o elemento está na lista.
+
+%Q9: Regra para informar os elementos duplicados,
+%considerando a ordem em que eles aparecem na lista.
+
+duplicados(L, R) :- duplicados(L, [], R).
+duplicados([], R, R) :- !.
+duplicados([H | T], D, R) :- freq(H,T, F), F > 0, \+ pertence(H, D), duplicados(T, [H | D])
+
+
+%Q10: Regra para eliminar os elementos duplicados.
