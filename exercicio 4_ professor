@@ -1,5 +1,9 @@
 %Q1: Regra para verificar a frequência de um elemento na lista.
 
+freq(_, [], 0) :- !.
+freq(V, [V | T], R) :- freq(V, T, N), R is N + 1.
+freq(V, [_ | T], R) :- freq(V, T, R).
+
 %Q2: Regra para concatenar duas listas.
 
 %Q3: Regra para concatenar duas listas dois a dois.
@@ -10,27 +14,30 @@
 %Q5: Regra para encontrar o último elemento na lista.
 
 %Q6: Regra para contar elementos contíguos 2 a 2 em uma lista.
+conta_dois([], 0) :- !.
+conta_dois([_], 0) :- !.
+
+conta_dois([A,A|T], R) :- conta_dois([A|T],R1), R is R1 + 1 .
+conta_dois([A,B|T], R) :- A \== B, conta_dois([B|T],R).
 
 %Q7: Regra para construir a lista reversa.
-
+reverso(L, R) :- reverso(L, [], R).
+reverso([], R, R) :- !.
+reverso([H | T], AUX, R) :- reverso(   T, [H| AUX], R).
 
 
 %Q8: Regra para informar se o elemento está na lista.
 
+pertence(V, [V | _]) :- !.
+pertence(V, [_, T]) :- pertence(V, T).
+
 %Q9: Regra para informar os elementos duplicados,
 %considerando a ordem em que eles aparecem na lista.
-freq(V, [], 0) :- !.
-freq(V, [V | T], R) :- freq(V, T, N), R is N + 1.
-freq(V, [_ | T], R) :- freq(V, T, R).
 
-pertence(V, [V | _]) :- !.
-pertence((V, [_, T]) :- pertence(V, T).
-         
-reverso(L, R) :- 
          
 duplicados(L, R) :- duplicados(L, [], R).
-duplicados([], R, R) :- !.
-duplicados([H | T], D, R) :- freq(H,T, F), F > 0, \+ pertence(H, D), duplicados(T, [H | D])
+duplicados([], D, R) :- reverso(D,R), !.
+duplicados([H | T], D, R) :-freq(H,T, F), F > 0, \+ pertence(H, D), duplicados(T, [H | D], R), !.
 
-duplicados([_ | T], D, R) :- duplicados(T, D, R).
+duplicados([_| T], D, R) :- duplicados(T, D, R).
 %Q10: Regra para eliminar os elementos duplicados.
