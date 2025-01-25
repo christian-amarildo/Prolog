@@ -1,0 +1,42 @@
+%--------aula 4 e 5 ----------
+
+homem(ivo).
+homem(gil).
+homem(noé).
+homem(raí).
+homem(ary).
+mulher(ana).
+mulher(eva).
+mulher(bia).
+mulher(clô).
+mulher(lia).
+mulher(gal).
+
+pai(ivo,eva).
+pai(gil,raí).
+pai(gil,clô).
+pai(gil,ary).
+pai(raí,noé).
+pai(ary,gal).
+
+mãe(ana,eva).
+mãe(bia,raí).
+mãe(bia,clô).
+mãe(bia,ary).
+mãe(eva,noé).
+mãe(lia,gal).
+
+gerou(X,Y) :- pai(X, Y); mãe(X,Y).
+
+irmão(X, Y) :- pai(P, X), pai(P, Y), X \== Y, homem(X).
+irmã(X, Y) :- pai(P, X), pai(P, Y), X \== Y, mulher(X).
+
+tio(X , Y) :- pai(P, Y), mãe(M,Y), irmão(P, X), irmão(M,X) X \== Y, homem(X).
+tia(X , Y) :- pai(P, Y), mãe(M,Y), irmão(X, P), irmão(X,M), X \== Y, mulher(X).
+
+avô(X, Y) :- pai(P, Y), mãe(M, Y), pai(X,P),mãe(X,M), homem(X).
+avó(X, Y) :- pai(P, Y), mãe(M, Y), pai(X,P),mãe(X,M), mulher(X).
+
+casal(X,Y) :- pai(X, Z), mãe(Y, Z) ; pai(Y, Z), mãe(X, Z), X\== y.
+
+feliz(P) :- pai(P, X) ; mãe(P, X).
