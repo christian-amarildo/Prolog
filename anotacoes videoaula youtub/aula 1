@@ -1,0 +1,6 @@
+%anotações da playlist prolog
+
+%--------aula 1---------
+mulher(bia).
+mulher(maria).
+tocaQuitarra(bia).
