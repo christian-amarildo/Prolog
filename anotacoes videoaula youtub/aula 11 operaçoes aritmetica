@@ -1,1 +1,43 @@
-a
+%--------aula 11 operaçoes aritmetica ----------
+
+pow_x(X,R) :- R is X*X.
+
+add_3_and_double(X, R) :- R is (X+3) * 2. 
+
+% programa 1
+%Escreva uma regra que receba o salário base de um vendedor, o total
+%de venda efetuadas por ele no mês e o total a receber por ele no
+%final do mês.
+
+%Sabe-se que o total a receber no final do mês é igual ao salário base
+%mais 15% das vendas efetuadas pelo funcionário.
+
+salario(Base, Vendas, Salario) :- Salario is Base + Vendas * 0.15.
+
+% programa 2
+
+% Escreva uma regra que receba os quatro valores correspondentes
+% aos eixos x e y de dois pontos quaisquer no plano, p1(x1,y1) e
+% p2(x2,y2), bem como a distância entre eles (D). A regra será
+% verdadeira se a distância entre os pontos for igual a D.
+
+distancia(X1,Y1,X2,Y2,D) :- D is ((X2-X1)**2) + ((Y2-Y1)**2)**0.5.
+
+
+% Programa 3
+% João pretende viajar de carro de Paragominas para Belém e gostaria
+% de sua ajuda para saber o quanto ele irá gastar. Considerando que a
+% distância de Belém para Paragominas é de 312 km, escreva um
+% programa que dado o preço do litro da gasolina e a autonomia do
+% carro em km/l calcule o gasto de João.
+
+custo(VL, AC, C) :- C is (312 / AC) * VL.
+
+
+
+
+
+
+
+
+
