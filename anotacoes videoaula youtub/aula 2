@@ -1,0 +1,10 @@
+%anotações da playlist prolog
+
+%--------aula 2---------
+pai(pedro, josé).
+pai(pedro, maria).
+amor(pedro, maria).
+
+%professora(maria) :- mulher(maria).
+%professora(carla) :- mulher(carla).
+professora(X) :- mulher(X).
