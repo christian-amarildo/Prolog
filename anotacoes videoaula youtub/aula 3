@@ -1,0 +1,10 @@
+%anotações da playlist prolog
+
+%--------aula 3----------
+
+pai(carlos,josé).
+pai(carlos,maria).
+irmão(josé, maria) :- pai(carlos,josé), pai(carlos,maria).
+irmão(maria , josé) :- pai(carlos,josé), pai(carlos,maria).
+
+irmão(X,Y) :- pai(P,X), pai(P,Y).
