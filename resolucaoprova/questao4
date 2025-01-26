@@ -1,0 +1,19 @@
+Questão 04: Responda as seguintes perguntas:
+a) O que é um predicado?
+Um predicado é um nome dado a uma regra ou um fato, por exemplo pai(joao,maria) ou irmao(X,Y) :- pai(P,X),pai(P,Y), X \== Y, homem(X), nesse casos os predicados seriam pai e irmao.
+
+b) O que é um fato?
+Fatos são estrutura para que são
+incodicionamente verdadeiras, por exemplo, pai(joao,maria).
+
+c) Como extrair os três primeiro elementos de uma lista?
+Para extrair os três primeiros elementos de uma lista é necessario colocar na cabeça da lista 3 variaveis para alocar os 3 primeiros elementos da lista, por exemplo, extrair_3_elementos([A,B,C|_],A,B,C).
+
+d) O que é um cláusula?
+Clausula é a unidade basica em prolog podendo ser um fato ou uma regra
+
+e) O que é um regra?
+Uma regra é uma clausula definida atraves de uma relaçao logica baseada em condições para ser verdadeira ou falsa.
+
+f) Qual o operador que interrompe a verificação de novas cláusulas pelo prolog?
+O operador que interrompe a verificação de novas cláusulas pelo prolog é o "cut" ou !.
