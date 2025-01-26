@@ -24,3 +24,74 @@ local(X,Y, 'Eixo X') :- X  =:= 0, Y =\= 0, !.
 
 
 
+%Programa 2
+%Leia 3 valores reais (A, B e C) e verifique se eles formam ou não um triângulo. Em caso positivo, calcule o perímetro do
+%triangulo e apresente a mensagem:
+
+%Perimetro = XX.X
+
+%Em caso negativo, calcule a área do trapézio que tem A e B como base e C como altura, mostrando a mensagem
+
+%Area = XX.X
+
+%Entrada
+
+%A entrada contém três valores reais.
+
+%Saida
+
+%O resultado deve ser apresentado com uma casa decimal.
+
+%Exemplo de Entrada
+
+%Exemplo de Saida
+
+%6.0 4.0 2.0
+
+%Area = 10.0
+
+%6.0 4.0 2.1
+
+%Perimetro = 12.1
+
+e_triangulo(A,B,C,R) :- A+B > C, A+C > B, B+C > A, 
+    X is A+B+C, atom_contat('Perimetro', X, R), ! .
+e_triangulo(A,B,C,R) :- 
+    X is ((A+B)*C)/2,atom_contat('Area', X, R), !.
+
+
+%Programa 3
+%Leia a hora inicial e a hora final de um jogo. A seguir calcule a duração do jogo, sabendo que o mesmo pode começar em
+%um dia e terminar em outro, tendo uma duração minima de 1 hora e máxima de 24 horas.
+
+%Entrada
+
+%A entrada contém dois valores inteiros representando a hora de inicio e a hora de fim do jogo.
+
+%Saída
+
+%Apresente a duração do jogo conforme exemplo abaixo.
+
+%Exemplo de Entrada
+
+%16 2
+
+%0 0
+
+%2 16
+
+%Exemplo de Saída
+%O JOGO DUROU 10 HORA(S)
+
+%O JOGO DUROU 24 HORA(S)
+
+%O JOGO DUROU 14 HORA(S)
+
+
+tempo_do_jogo(I,F,T) :- I >= F, T is F + 24 - I, !.
+tempo_do_jogo(I,F,T) :- T is F - I.
+
+
+
+
+
