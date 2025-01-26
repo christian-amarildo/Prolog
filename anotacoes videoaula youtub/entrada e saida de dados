@@ -1,23 +1,115 @@
-%-------------aula entrada e saida------------
+%-------------aula entrada e saida questões ------------
 
-programa :- read(X), ola(X).
-ola(X) :- write(X).
 
-programa_v2 :- read(X), ola2(X).
-ola2(X) :- atom_concat('Olá ', X, R), write(R).
+%Com base na tabela abaixo, escreva um programa que leia o código de um item e a quantidade deste item. A seguir,
+%calcule e mostre o valor da conta a pagar.
 
-programa_v3 :- read(X), ola3(X).
-ola3(X) :- write('Olá '), write(X).
+%CODIGO
 
-maior :- read(X), nl, read(Y), maiod(x, Y).
-maior(x, Y) :- x > Y, write(X), !.
-maior(_X, Y) :- write(Y).
+%5
 
-Predicate defined in line 11
+%ESPECIFICAÇÃO
+%Cachorro Quente
+%X-Salada
 
-eh_par :- read(X), verifica(X).
-verifica(X) :- mod(x, 2) =:= 0, write(X), write(' é par!'), !.
-verifica(X) :- write(X), write(' é ímpar!').
+%X-Bacon
+
+%Torrada simples
+%Refrigerante
+
+%PREÇO
+%R$ 4.00
+%R$ 4.50
+
+%R$ 5.00
+%R$ 2.00
+%R$ 1.50
+
+%Entrada
+%O arquivo de entrada contém dois valores inteiros correspondentes ao código e à quantidade de um item conforme
+%tabela acima.
+
+%Saída
+
+%O arquivo de saída deve conter a mensagem "Total: R$ " seguido pelo valor a ser pago, com 2 casas após o ponto
+%decimal.
+
+%Exemplo de Entrada
+
+%3 2
+
+%Exemplo de Saída
+%Total: R$ 10.00
+
+%4 3
+
+%2 3
+
+%Total: R$ 6.00
+
+%Total: R$ 13.50
+
+
+programa :- read(C), nl, read(Q), cardapio(C,Q).
+cardapio(1,Q) :- R is Q * 4.0, write('Total: R$ '), write(R), !.  
+cardapio(2,Q) :- R is Q * 4.5, write('Total: R$ '), write(R), !.  
+cardapio(3,Q) :- R is Q * 5.0, write('Total: R$ '), write(R), !.  
+cardapio(4,Q) :- R is Q * 2.0, write('Total: R$ '), write(R), !.  
+cardapio(5,Q) :- R is Q * 1.5, write('Total: R$ '), write(R), !.  
+
+%Faça um programa que leia 5 valores inteiros. Conte quantos destes valores digitados são pares e mostre esta
+%informação.
+
+%Entrada
+
+%O arquivo de entrada contém 5 valores inteiros quaisquer.
+
+%Saída
+
+%Imprima a mensagem conforme o exemplo fornecido, indicando a quantidade de valores pares lidos.
+
+%Exemplo de Entrada
+
+%7
+
+%-5
+
+%6
+
+%-4
+
+%12
+
+%Exemplo de Saída
+
+%3 valores pares
+
+programa :- read(A1), nl,
+    		read(A2), nl,
+    		read(A3), nl,
+    		read(A4), nl,
+    		read(A5), nl,
+			eh_par(A1, 0, R1),
+			eh_par(A2, R1, R2),
+			eh_par(A3, R2, R3),
+			eh_par(A4, R3, R4),
+			eh_par(A5, R4, R5),
+			write(R5),
+    		write(' valores pares').
+
+    
+    
+eh_par(A, P, R) :- mod(A,2) =:= 0, R is P+1, !.
+eh_par(_A, P, R) :- R is P.
+
+
+
+
+
+
+
+
+
 
 
 
