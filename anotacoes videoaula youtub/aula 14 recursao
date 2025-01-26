@@ -1,0 +1,88 @@
+%---------------aula recursividade---------
+
+programa :- read(X), check(X).
+check(0) :- !.
+check(X) :- mod(X,2) =:= 0, write('par'), programa, !.
+check(_X) :- write('ímpar'), programa.
+
+%Leia um valor inteiro X (1 <= X <= 1000). Em seguida mostre os ímpares de 1 até X, um valor por linha, inclusive o X, se
+%for o caso.
+
+%Entrada
+
+%O arquivo de entrada contém 1 valor inteiro qualquer.
+
+%Saída
+%Imprima todos os valores ímpares de 1 até X, inclusive X, se for o caso.
+
+%Exemplo de Entrada
+
+%Exemplo de Saída
+
+%8
+
+%1
+
+%3
+
+%5
+
+%357
+
+%7
+
+
+impares :- read(X), eh_impar(1,X).
+eh_impar(C,X) :- C > X, !.
+eh_impar(C,X) :- write(C), nl, R is C + 2, eh_impar(R,X).
+
+%Leia um valor inteiro N. Este valor será a quantidade de valores inteiros X que serão lidos em seguida.
+%Mostre quantos destes valores X estão dentro do intervalo [10,20] e quantos estão fora do intervalo, mostrando essas
+%informações.
+
+%Entrada
+
+%A primeira linha da entrada contém um valor inteiro N (N < 10000), que indica o número de casos de teste.
+%Cada caso de teste a seguir é um valor inteiro X (-107 < X <107).
+
+%Saída
+%Para cada caso, imprima quantos números estão dentro (in) e quantos valores estão fora (out) do intervalo.
+
+%Exemplo de Saída
+
+%Exemplo de Entrada
+
+%4
+
+%14
+%123
+%10
+%-25
+
+%2 in
+%2 out
+
+
+intervalo :- read(N), conta(1, N, 0).
+
+conta(I, N, ACC) :- I > N, imprimir(N, ACC), !.
+conta(I,N,ACC) :- read(X), R is I+1, verifica(R, N, ACC, X).
+
+verifica(I,N,ACC,X) :- X>= 10, X =< 20, AUX is ACC + 1, conta(I,N,AUX).
+
+verifica(I,N,ACC,_X) :- conta(I,N,ACC).
+
+imprimir(N,ACC) :- write(ACC), write(' in'), nl, OUT is N - ACC, write(OUT), write(' out').
+
+
+
+
+
+
+
+
+
+
+
+
+
