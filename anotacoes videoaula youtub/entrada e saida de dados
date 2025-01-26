@@ -1,0 +1,23 @@
+%-------------aula entrada e saida------------
+
+programa :- read(X), ola(X).
+ola(X) :- write(X).
+
+programa_v2 :- read(X), ola2(X).
+ola2(X) :- atom_concat('Olá ', X, R), write(R).
+
+programa_v3 :- read(X), ola3(X).
+ola3(X) :- write('Olá '), write(X).
+
+maior :- read(X), nl, read(Y), maiod(x, Y).
+maior(x, Y) :- x > Y, write(X), !.
+maior(_X, Y) :- write(Y).
+
+Predicate defined in line 11
+
+eh_par :- read(X), verifica(X).
+verifica(X) :- mod(x, 2) =:= 0, write(X), write(' é par!'), !.
+verifica(X) :- write(X), write(' é ímpar!').
+
+
+
