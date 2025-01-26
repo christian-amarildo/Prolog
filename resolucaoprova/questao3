@@ -1,0 +1,12 @@
+hamming([], [], 0) .
+
+hamming([Cabecalista1|CaudaLista1], [Cabecalista2|Caudalista2], Distancia) :-
+    hamming(Caudalista1, Caudalista2, Distancia1),
+    soma_hamming(Cabecalista1, cabecalista2, Distancia1, Distancia).
+
+soma_hamming(Cabecalista1, Cabecalista2, Distancia1, Distancia) :-
+    Cabecalista1 = Cabecalista2,
+    Distancia is Distancia1.
+soma_hamming(Cabecalista1, Cabecalista2, Distancia1, Distancia) :-
+    Cabecalista1 \= Cabecalista2,
+    Distancia is Distancia1 + 1.
