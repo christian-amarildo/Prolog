@@ -1,0 +1,96 @@
+%Utilizando o predicado turma\2 escreva uma cláusula para exibir a relação de alunos de um
+%determinado professor. Ao realizar uma consulta, você deve passar no primeiro termo o nome do
+%professor.
+
+
+aluno(pedro, prog).
+aluno(pedro, calculo).
+aluno(pedro, ihc).
+aluno(maria, prog).
+aluno(maria, so).
+aluno(jose, calculo).
+aluno(jose, ihc).
+
+professor(renato, prog).
+professor(valcir, calculo).
+professor(marcele, ihc).
+
+% Predicado para listar alunos de um professor
+turma(Professor, Aluno) :-
+    professor(Professor, Disciplina),  % Obtém a disciplina do professor
+    aluno(Aluno, Disciplina).          % Encontra alunos nessa disciplina
+
+%Questão 02: Escreva uma base de conhecimento para contar quantos elementos devem ser
+%removidos para que a lista passada na consulta não tenha valores duplicados. A cláusula de consulta
+%deve utilizar o predicado contar_repetidos/2. Ao realizar uma consulta, você deve passar no
+%primeiro termo uma lista de números inteiros. Não utilize nenhum predicado nativo na construção
+%desta base de conhecimento.
+%Exemplo de consulta:
+%count([1,2,2,3,4,1,1,4,2], R)
+%R = 5
+
+contar_repetidos(Lista, R) :-
+    contar_repetidos_aux(Lista, [], 0, R).
+
+contar_repetidos_aux([], _, R, R).
+
+contar_repetidos_aux([H|T], Processados, Acum, R) :-
+    pertence(H, Processados),
+    contar_repetidos_aux(T, Processados, Acum, R).
+
+contar_repetidos_aux([H|T], Processados, Acum, R) :-
+    \+ pertence(H, Processados),
+    contar_ocorrencias(H, [H|T], Contagem),
+    NovoAcum is Acum + (Contagem - 1),
+    contar_repetidos_aux(T, [H|Processados], NovoAcum, R),
+    !.  % Corte lógico para evitar backtracking
+
+pertence(X, [X|_]) :- !.
+pertence(X, [_|T]) :- pertence(X, T).
+
+contar_ocorrencias(X, [X|T], N) :-
+    contar_ocorrencias(X, T, N1),
+    N is N1 + 1.
+contar_ocorrencias(X, [_|T], N) :-
+    contar_ocorrencias(X, T, N).
+contar_ocorrencias(_, [], 0).
+
+%Questão 03: Escreva uma base de conhecimento para calcular a distância de hamming de uma lista
+%binária. Desenvolva uma cláusula hamming\2 tal que o primeiro termo seja uma lista binária e o
+%segundo termo seja a variável de resposta não instanciada. Para construir esta base de
+%conhecimento, utilize a estratégia recursiva bottom up. Não utilize nenhum predicado nativo na
+%construção desta base de conhecimento.
+
+hamming([], [], 0) .
+
+hamming([Cabecalista1|Caudalista1], [Cabecalista2|Caudalista2], Distancia) :-
+    hamming(Caudalista1, Caudalista2, Distancia1),
+    soma_hamming(Cabecalista1, Cabecalista2, Distancia1, Distancia).
+
+soma_hamming(Cabecalista1, Cabecalista2, Distancia1, Distancia) :-
+    Cabecalista1 = Cabecalista2,
+    Distancia is Distancia1.
+soma_hamming(Cabecalista1, Cabecalista2, Distancia1, Distancia) :-
+    Cabecalista1 \= Cabecalista2,
+    Distancia is Distancia1 + 1.
+
+
+% Questão 04: Responda as seguintes perguntas:
+% a) O que é um predicado?
+% Um predicado é um nome dado a uma regra ou um fato, por exemplo pai(joao,maria) ou irmao(X,Y) :- pai(P,X),pai(P,Y), X \== Y, homem(X), nesse casos os predicados seriam pai e irmao.
+
+%b) O que é um fato?
+%Fatos são estrutura para que são
+%incodicionamente verdadeiras, por exemplo, pai(joao,maria).
+
+%c) Como extrair os três primeiro elementos de uma lista?
+%Para extrair os três primeiros elementos de uma lista é necessario colocar na cabeça da lista 3 variaveis para alocar os 3 primeiros elementos da lista, por exemplo, extrair_3_elementos([A,B,C|_],A,B,C).
+
+%d) O que é um cláusula?
+%Clausula é a unidade basica em prolog podendo ser um fato ou uma regra
+
+%e) O que é um regra?
+%Uma regra é uma clausula definida atraves de uma relaçao logica baseada em condições para ser verdadeira ou falsa.
+
+%f) Qual o operador que interrompe a verificação de novas cláusulas pelo prolog?
+%O operador que interrompe a verificação de novas cláusulas pelo prolog é o "cut" ou !.
